@@ -1,21 +1,5 @@
-import datetime
-
-class Building:
-    def __init__(self, address, stories):
-        self.designer = ''
-        self.date_constructed = ''
-        self.owner = ''
-        self.address = address
-        self.stories = stories
-
-    def construct(self):
-        cons_date = datetime.datetime.now()
-        formatted_date = f'{str(cons_date)[5:7]}/{str(cons_date)[8:10]}/{str(cons_date)[:4]}'
-        self.date_constructed = formatted_date
-
-    def purchase(self, name):
-        self.owner = name
-
+from building import Building
+from city import City
 
 # Create 5 building instances
 b1 = Building("123 Street St", 450)
@@ -38,13 +22,18 @@ b3.construct()
 b4.construct()
 b5.construct()
 
-# Once all building are purchased and constructed, print the address, owner, stories, and date constructed to the terminal for each one.
-buildings = [b1, b2, b3, b4, b5]
-for building in buildings:
+# Create a new city instance and add your building instances to it. Once all buildings are in the city, iterate the city's building collection and output the information about each building in the city.
+
+gotham = City("Gotham")
+
+bldgs = [b1, b2, b3, b4, b5]
+
+for bldg in bldgs:
+    gotham.add_building(bldg)
+
+for building in gotham.buildings:
     if building.stories == 1:
         print(f'{building.address} was purchased by {building.owner} on {building.date_constructed} and has {building.stories} story.')
     else:
         print(f'{building.address} was purchased by {building.owner} on {building.date_constructed} and has {building.stories} stories.')
     print()
-
-# 800 8th Street was purchased by Bob Builder on 03/14/2018 and has 12 stories.
